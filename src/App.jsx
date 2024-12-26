@@ -1,6 +1,5 @@
 import ModalComponent from "./components/ModalComponent";
 import useApp from "./hooks/useApp";
-import useModal from "./hooks/useModal";
 import "./App.css";
 
 function App() {
@@ -11,14 +10,21 @@ function App() {
     clearParticipants,
     calculateTransfers,
     participants,
+    modalIsOpen,
+    openModal,
+    closeModal,
+    modalData
   } = useApp();
-
-  // const { modalIsOpen, openModal, closeModal, modalData } = useModal();
 
   const handleCalculateTransfers = (e) => {
     e.preventDefault();
     calculateTransfers();
-    // openModal();
+    openModal();
+  };
+
+  const handleModal = (e) => {
+    e.preventDefault();
+    openModal();
   };
 
   return (
@@ -58,6 +64,7 @@ function App() {
             <button onClick={addPerson}>Agregar</button>
             <button onClick={clearParticipants}>Limpiar</button>
             <button onClick={handleCalculateTransfers}>Calcular</button>
+            <button onClick={handleModal}>Modal</button>
           </div>
         </form>
       </div>
@@ -84,11 +91,11 @@ function App() {
         </div>
       </div>
       {/* Modal */}
-      {/* <ModalComponent
+      <ModalComponent
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         alertData={modalData}
-      /> */}
+      />
     </>
   );
 }

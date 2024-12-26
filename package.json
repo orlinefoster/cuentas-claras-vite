@@ -2,7 +2,7 @@
   "name": "cuentas-claras-vite",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://pentacornio.github.io/cuentas-claras-vite/",
+  "homepage": "https://orlinefoster.github.io/cuentas-claras-vite/",
   "type": "module",
   "scripts": {
     "dev": "vite",

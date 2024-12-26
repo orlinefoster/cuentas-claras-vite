@@ -3,6 +3,9 @@ import { useState } from "react";
 function useApp() {
   const [participants, setParticipants] = useState([]);
   const [newPerson, setNewPerson] = useState({ name: "", amount: "" });
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalData, setModalData] = useState(null);
+
 
   const addPerson = (e) => {
     e.preventDefault();
@@ -22,11 +25,7 @@ function useApp() {
     setParticipants([]);
   };
 
-  const calculateTransfers = (e) => {
-    if (e) {
-      e.preventDefault();
-    }
-
+  const calculateTransfers = () => {
     if (participants.length === 0) {
       console.log("No hay participantes para calcular.");
       return;
@@ -88,18 +87,18 @@ function useApp() {
       })),
     };
 
-    // Mostrar datos en un alert
-    alert(
-      `Monto total: ${alertData.totalAmount}\n
-      Total de participantes: ${alertData.totalParticipants}\n
-      Monto por persona: ${alertData.averageAmount}\n
-      Participantes:\n${alertData.participants
-        .map((p) => `${p.name} aporto $${p.amount}`)
-        .join("\n")}\nTransferencias:\n${alertData.transactions
-        .map((t) => `${t.from} -> ${t.to}: $${t.amount}`)
-        .join("\n")}`
-    );
+    setModalData(alertData);
   };
+
+  // MODAL
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
 
   return {
     newPerson,
@@ -108,6 +107,10 @@ function useApp() {
     clearParticipants,
     calculateTransfers,
     participants,
+    modalData,
+    openModal,
+    closeModal,
+    modalIsOpen
   };
 }
 
