@@ -1,6 +1,6 @@
 import ModalComponent from "./components/ModalComponent";
 import useApp from "./hooks/useApp";
-import "./App.css";
+import './index.css'
 
 function App() {
   const {
@@ -19,11 +19,6 @@ function App() {
   const handleCalculateTransfers = (e) => {
     e.preventDefault();
     calculateTransfers();
-    openModal();
-  };
-
-  const handleModal = (e) => {
-    e.preventDefault();
     openModal();
   };
 
@@ -64,7 +59,6 @@ function App() {
             <button onClick={addPerson}>Agregar</button>
             <button onClick={clearParticipants}>Limpiar</button>
             <button onClick={handleCalculateTransfers}>Calcular</button>
-            <button onClick={handleModal}>Modal</button>
           </div>
         </form>
       </div>

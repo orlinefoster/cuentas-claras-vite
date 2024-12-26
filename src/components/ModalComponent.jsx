@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
-import './ModalComponent.css';
+import '../index.css'
 
 const ModalComponent = ({ isOpen, onRequestClose, alertData }) => (
   <Modal
