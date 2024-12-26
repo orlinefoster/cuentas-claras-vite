@@ -10,10 +10,12 @@ function App() {
     clearParticipants,
     calculateTransfers,
     participants,
+    editPerson,
     modalIsOpen,
     openModal,
     closeModal,
-    modalData
+    modalData,
+    isEditing
   } = useApp();
 
   const handleCalculateTransfers = (e) => {
@@ -56,7 +58,13 @@ function App() {
             }
           />
           <div className="buttons-container">
-            <button onClick={addPerson}>Agregar</button>
+            {
+              isEditing === false ? (
+                <button onClick={addPerson}>Agregar</button>
+              ) : (
+                <button onClick={addPerson}>Modificar</button>
+              )
+            }
             <button onClick={clearParticipants}>Limpiar</button>
             <button onClick={handleCalculateTransfers}>Calcular</button>
           </div>
@@ -71,6 +79,7 @@ function App() {
               <tr>
                 <th>Nombre</th>
                 <th>Importe</th>
+                <th>Editar</th>
               </tr>
             </thead>
             <tbody>
@@ -78,6 +87,9 @@ function App() {
                 <tr key={index}>
                   <td>{participant.name}</td>
                   <td>$ {participant.amount}</td>
+                  <td>
+                    <button onClick={() => editPerson(index)}>✏️</button>
+                  </td>
                 </tr>
               ))}
             </tbody>

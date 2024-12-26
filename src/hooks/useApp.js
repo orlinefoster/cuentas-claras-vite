@@ -3,6 +3,8 @@ import { useState } from "react";
 function useApp() {
   const [participants, setParticipants] = useState([]);
   const [newPerson, setNewPerson] = useState({ name: "", amount: "" });
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
@@ -10,14 +12,33 @@ function useApp() {
   const addPerson = (e) => {
     e.preventDefault();
 
-    // Validar que ambos campos estén llenos
     if (newPerson.name.trim() === "" || newPerson.amount.trim() === "") {
       alert("Por favor, complete todos los campos antes de agregar.");
       return;
     }
 
-    setParticipants([...participants, newPerson]);
+    if (editingIndex !== null) {
+      const updatedParticipants = [...participants];
+      updatedParticipants[editingIndex] = newPerson;
+      setParticipants(updatedParticipants);
+      setEditingIndex(null);
+    } else {
+      setParticipants([...participants, newPerson]);
+    }
+
     setNewPerson({ name: "", amount: "" });
+  };
+
+  const editPerson = (index) => {
+    if (isEditing === true) {
+      setEditingIndex(null);
+      setNewPerson("");
+      setIsEditing(false);
+    } else {
+      setIsEditing(true)
+      setNewPerson(participants[index]);
+      setEditingIndex(index);
+    }
   };
 
   const clearParticipants = (e) => {
@@ -110,7 +131,9 @@ function useApp() {
     modalData,
     openModal,
     closeModal,
-    modalIsOpen
+    modalIsOpen,
+    editPerson,
+    isEditing
   };
 }
 
