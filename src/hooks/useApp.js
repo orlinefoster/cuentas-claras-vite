@@ -22,6 +22,7 @@ function useApp() {
       updatedParticipants[editingIndex] = newPerson;
       setParticipants(updatedParticipants);
       setEditingIndex(null);
+      setIsEditing(false);
     } else {
       setParticipants([...participants, newPerson]);
     }
